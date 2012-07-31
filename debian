@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ldapsearch -LLL -x -H ldap://db.debian.org -b dc=debian,dc=org '(&(ircnick=*)(uid=*))' ircnick uid | sed -e 's/^dn:.*$//g' -e 's/uid: //g' -e 's/ircNick: //g' -e '/^$/d' -e 's/[, @].*$//g' | sed 'N;s/\n/|/;' | awk -F'|' '{print $2 " " $1 }'

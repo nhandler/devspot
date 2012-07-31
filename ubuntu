@@ -1,0 +1,34 @@
+#!/usr/bin/python
+# Based on https://wiki.ubuntu.com/IRC/Cloaks
+from launchpadlib.launchpad import Launchpad
+launchpad = Launchpad.login_anonymously('devspot', 'production')
+
+_get_team_members_done = [] # Cache of already fetched Launchpad teams
+def get_team_members(lp, team):
+    '''Get all members of a team and all sub-teams.
+    Returns a set of Person names
+    '''
+
+    if team in _get_team_members_done: # Don't fetch team members multiple times
+        return set()
+
+    _get_team_members_done.append(team)
+    team = lp.people[team]
+    members = set()
+
+    for member in team.members:
+        if not member.is_team:
+            members.add(member.name)
+        else: # Recurs into sub-teams
+            members.update(get_team_members(lp, member.name))
+
+    return members
+
+members = get_team_members(launchpad, u'ubuntumembers')
+
+for member in members:
+    person = launchpad.people[member]
+    try:
+        print person.irc_nicknames[0].nickname + ' ' + person.name
+    except IndexError:
+        continue
