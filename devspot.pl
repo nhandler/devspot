@@ -32,10 +32,10 @@ sub isdev {
     my($data,$server,$witem) = @_;
     &reloadList();
     if($names{lc($data)}) {
-        Irssi::print("$data is a developer (" . $names{lc($data)} . ")");
+        Irssi::active_win()->print("$data is a developer (" . $names{lc($data)} . ")");
     }
     else {
-        Irssi::print("$data is NOT a developer");
+        Irssi::active_win()->print("$data is NOT a developer");
     }
 }
 
