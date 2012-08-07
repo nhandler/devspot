@@ -1,6 +1,6 @@
 #!/bin/sh
 
-./debian > ./names
-./ubuntu >> ./names
-sort ./names | rev | uniq -f1 | rev > ./names.tmp
-mv ./names.tmp ./names
+./debian > ./devspot.list
+./ubuntu >> ./devspot.list
+sort ./names | rev | uniq -f1 | rev > ./devspot.list.tmp
+mv ./devspot.list.tmp ./devspot.list
