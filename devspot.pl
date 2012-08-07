@@ -22,6 +22,7 @@ sub reloadList {
     my @NAMES = <NAMES>;
     close(NAMES);
     foreach my $line (@NAMES) {
+        chomp $line;
         my($nick,$name) = split(/ /, $line,  2);
         $names{lc($nick)}=$name;
     }
