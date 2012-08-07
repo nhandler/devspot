@@ -26,7 +26,7 @@ sub reloadList {
     foreach my $line (@NAMES) {
         my($nick,$name) = split(/ /, $line,  2);
         $names{lc($nick)}=$name;
-    }}
+    }
 }
 
 sub isdev {
