@@ -15,8 +15,6 @@ $VERSION = "1.0";
 
 my %names = ();
 
-&reloadList();
-
 sub reloadList {
     my $path = Irssi::settings_get_str('devspot_list');
     %names = ();
